@@ -17,7 +17,7 @@ const NODE = process.env.NODE_ENV || 'production'
 //middleware
 app.use(cookieParser());
 app.use(cors({
-    origin:'http://localhost:5173', 
+    origin:['http://localhost:5173' || "https://arunp-frontend.vercel.app/"], 
     credentials:true,
 }))
 app.use(express.json())

@@ -17,12 +17,13 @@ const NODE = process.env.NODE_ENV || 'production'
 //middleware
 app.use(cookieParser());
 app.use(cors({
-    origin:['http://localhost:5173' || "https://arunp-frontend.vercel.app/"], 
+    origin:'https://arunp-frontend.vercel.app',
+    // origin:'http://localhost:5173'  
     credentials:true,
 }))
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-// app.use(cors())
 
 
 

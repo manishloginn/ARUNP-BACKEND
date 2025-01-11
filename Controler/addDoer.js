@@ -2,10 +2,10 @@ const doesSchema = require("../model/doesSchema");
 const { findOne } = require("../model/doesSchema");
 
 const addDoer = async (req, res) => {
-    const { name, email, admin, password, powertoaccess } = req.body;
+    const { name, email, admin, password, powertoaccess, mobile } = req.body;
 
-    if (!name || !email || !password) {
-        return res.status(400).json({ message: "Please fill name and email both" })
+    if (!name || !email || !password || !mobile) {
+        return res.status(400).json({ message: "Please fill all Details" })
     }
     try {
         const allreaddyRegistered = await doesSchema.findOne({ email })
@@ -18,7 +18,8 @@ const addDoer = async (req, res) => {
             email,
             admin,
             powertoaccess,
-            password
+            password,
+            mobile
         })
 
         newDoer.save()
@@ -35,9 +36,12 @@ const addDoer = async (req, res) => {
 
 
 const editDoer = async (req, res) => {
-    const { id, name, email,  powertoaccess } = req.body;
-    console.log("hit")
+    const {id} = req.query;
     console.log(id)
+    const { name, email, mobile } = req.body;
+    // console.log("hit")
+    console.log(id)
+    console.log(powertoaccess)
 
     if (!id, !name, !email) {
         return res.status(400).json({
@@ -46,7 +50,7 @@ const editDoer = async (req, res) => {
     }
 
     try {
-        const findDoer = await doesSchema.findById({_id:id})
+        const findDoer = await doesSchema.findById({ _id: id })
         if (!findDoer) {
             return res.status(404).json({
                 message: "Doer not found",
@@ -63,8 +67,9 @@ const editDoer = async (req, res) => {
         }
 
         findDoer.name = name,
-        findDoer.email = email;
+            findDoer.email = email;
         findDoer.powertoaccess = powertoaccess;
+        findDoer.mobile = mobile;
 
         findDoer.save()
         res.status(200).json({
@@ -77,9 +82,35 @@ const editDoer = async (req, res) => {
     }
 }
 
+const addPermission = async (req, res) => {
+    const {id} = req.query;
+    const {powertoaccess} = req.body;
+
+    console.log(powertoaccess)
+
+    try {
+        
+        const response = await doesSchema.findById(id)
+
+
+        // response.powertoaccess.push(powertoaccess)
+
+
+        console.log(response)
+        res.status(200).json({
+            message:"powertoaccess success"
+        })
+
+    } catch (error) {
+        return res.status(500).json({ message: "Server error", error: error.message });
+    }
+
+
+}
+
 
 const deleteDoer = async (req, res) => {
-    const { id } = req.body;
+    const {id} = req.query;
 
     // console.log(id)
 
@@ -105,4 +136,4 @@ const deleteDoer = async (req, res) => {
     }
 }
 
-module.exports = { addDoer, editDoer, deleteDoer }
+module.exports = { addDoer, editDoer, deleteDoer, addPermission }

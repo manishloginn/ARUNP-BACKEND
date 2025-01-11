@@ -10,6 +10,10 @@ const doer = new Schema({
         type:String, 
         require:true
     },
+    mobile: {
+        type:String, 
+        require:true
+    },
     password:{
         type:String,
         require:true
@@ -21,7 +25,16 @@ const doer = new Schema({
     },
     powertoaccess:{
         type:[String],
-        enum:["option1", "option2", "option3", "option4", "option4"],
+        enum:[ 'Option 1',
+            'Option 2',
+            'Option 3',
+            'Option 4',
+            'Option 5',
+            'Option 6',
+            'Option 7',
+            'Option 8',
+            'Option 9',
+            'Option 10',],
         default:[]
     }
 })

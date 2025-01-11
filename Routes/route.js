@@ -1,5 +1,5 @@
 const express = require('express')
-const { addDoer, editDoer, deleteDoer } = require('../Controler/addDoer')
+const { addDoer, editDoer, deleteDoer, addPermission } = require('../Controler/addDoer')
 const { taskDelegation } = require('../Controler/taskDelegation')
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
@@ -52,6 +52,7 @@ const generateOTP = () => {
 
 router.post('/add-Doer', authenticate, addDoer)
   .post('/edit-Doer', authenticate, editDoer)
+  .post('/add-permision', authenticate, addPermission)
   .post('/delete-Doer', authenticate, deleteDoer)
   .post('/taskDelegation', authenticate, taskDelegation)
   .post('/changeStatus', authenticate, changeStatus)

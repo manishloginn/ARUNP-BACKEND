@@ -41,7 +41,7 @@ const editDoer = async (req, res) => {
     const { name, email, mobile } = req.body;
     // console.log("hit")
     console.log(id)
-    console.log(powertoaccess)
+    // console.log(powertoaccess)
 
     if (!id, !name, !email) {
         return res.status(400).json({
@@ -68,7 +68,7 @@ const editDoer = async (req, res) => {
 
         findDoer.name = name,
             findDoer.email = email;
-        findDoer.powertoaccess = powertoaccess;
+        // findDoer.powertoaccess = powertoaccess;
         findDoer.mobile = mobile;
 
         findDoer.save()
